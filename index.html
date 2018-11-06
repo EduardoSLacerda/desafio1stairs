@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>staris</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/classe.css">
+</head>
+
+<body>
+    <script>
+
+        //Rotina que retorna que retorna o único carácter número par de vezes dentro um objeto passado
+        function Validar(objeto) {
+            let tamanhoPalavra = objeto.value.length;
+            let letraAtual, letraPar;
+            let existePar = false;
+            let letraAtualEhPar = false;
+            let i = 0;
+            for (i; i < tamanhoPalavra; i++) {
+                letraAtual = objeto.value.charAt(i);
+                letraAtualEhPar = BuscarPar(objeto, letraAtual);
+                if (letraAtualEhPar && existePar && letraAtual != letraPar) {
+                    existePar = false;
+                    break;
+                } else if (letraAtualEhPar && letraAtual != letraPar) {
+                    existePar = true;
+                    letraPar = letraAtual;
+                }
+            }
+            if (existePar && objeto.value.match("^[a-z]{1,30}$")) {
+                return alert(letraPar);
+            } else if (objeto.value.length > 2 && objeto.value.match("^[a-z]{1,30}$")) {
+                return alert("--");
+            }
+        }
+        //Rotina que verifica se o carácter se repete um número par de vezes dentro do objeto passado
+        function BuscarPar(objeto, letra) {
+            let contaLetra = 0;
+            let letraAtual;
+            for (let i = 0; i < objeto.value.length; i++) {
+                letraAtual = objeto.value.charAt(i);
+                if (letraAtual == letra) {
+                    contaLetra++
+                }
+            }
+            if (contaLetra % 2 == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    </script>
+
+    <div class="bigStairs">stairs</div>
+
+    <div class="centerBoxStairs">
+
+        <form action="">
+            <label for="Valores"> Valor</label>
+            <input type="text" class="submitStairs" id="valor" pattern="^[a-z]{2,}$" required>
+            <button type="submit" class="buttonStairs" value="validar" onclick="Validar(valor)">validar</button>
+            <small id="" class="form-text text-muted">
+                O conteúdo inserido aceita letras de a até z (letras minúscuulas) e no mínimo 2 caracteres
+            </small>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
